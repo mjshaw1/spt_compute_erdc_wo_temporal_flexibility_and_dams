@@ -1,0 +1,26 @@
+*cmd* 'USER safer'
+*resp* '331 User safer OK. Password required'
+*cmd* 'PASS *******'
+*resp* '230-OK. Current directory is /\n230-**********************************************************************\n230- The owner of the ftp account safer is Florian.Pappenberger@ecmwf.int.\n230- The space utilisation of the ftp account safer is 1014G/1000000MB.\n230- This information has been updated on Tue Sep  3 12:06:55 UTC 2019\n230-**********************************************************************\n230 965915291 Kbytes used (94%) - authorized: 1024000000 Kb'
+*cmd* 'CWD tcyc'
+*resp* '250 OK. Current directory is /tcyc'
+*cmd* 'TYPE A'
+*resp* '200 TYPE is now ASCII'
+*cmd* 'PASV'
+*resp* '227 Entering Passive Mode (136,156,180,246,119,236)'
+Traceback (most recent call last):
+  File "/root/chl/spt/scripts/run_ftp_download_ecmwf.py", line 388, in <module>
+    ecmwf_folders = sorted(get_ftp_forecast_list('Runoff.%s*%s*.netcdf.tar*' % (date_string, region), ftp_host, ftp_login, ftp_passwd, ftp_directory))
+  File "/root/chl/spt/scripts/run_ftp_download_ecmwf.py", line 166, in get_ftp_forecast_list
+    file_list = ftp_client.ftp.nlst(file_match)
+  File "/root/miniconda2/envs/spt_python27/lib/python2.7/ftplib.py", line 518, in nlst
+    self.retrlines(cmd, files.append)
+  File "/root/miniconda2/envs/spt_python27/lib/python2.7/ftplib.py", line 437, in retrlines
+    conn = self.transfercmd(cmd)
+  File "/root/miniconda2/envs/spt_python27/lib/python2.7/ftplib.py", line 376, in transfercmd
+    return self.ntransfercmd(cmd, rest)[0]
+  File "/root/miniconda2/envs/spt_python27/lib/python2.7/ftplib.py", line 335, in ntransfercmd
+    conn = socket.create_connection((host, port), self.timeout)
+  File "/root/miniconda2/envs/spt_python27/lib/python2.7/socket.py", line 575, in create_connection
+    raise err
+socket.error: [Errno 110] Connection timed out
